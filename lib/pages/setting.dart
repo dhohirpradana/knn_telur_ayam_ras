@@ -18,11 +18,6 @@ class _SettingPageState extends State<SettingPage> {
   TextEditingController _textEditingController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     void _update() {
       AwesomeDialog(
