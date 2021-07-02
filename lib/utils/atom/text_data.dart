@@ -3,79 +3,128 @@ import 'package:flutter/material.dart';
 import 'package:knn_telur/utils/atom/text_style.dart';
 import 'package:knn_telur/utils/atom/to_string.dart';
 
-Widget textH(h) => Row(
+class WidgetTextH extends StatelessWidget {
+  final v;
+
+  const WidgetTextH({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Hue\t\t\t\t\t\t\t\t\t\t',
           ),
         ),
-        Text(': '),
-        textToStringFixed(h, 0, 5)
+        const Text(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
+  }
+}
 
-Widget textS(s) => Row(
+class WidgetTextS extends StatelessWidget {
+  final v;
+
+  const WidgetTextS({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Saturation\t\t',
           ),
         ),
-        AutoSizeText(': '),
-        textToStringFixed(s, 0, 5)
+        const AutoSizeText(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
-Widget textL(v) => Row(
+  }
+}
+
+class WidgetTextL extends StatelessWidget {
+  final v;
+
+  const WidgetTextL({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Lightness\t\t\t\t',
           ),
         ),
-        AutoSizeText(': '),
-        textToStringFixed(v, 0, 5)
+        const AutoSizeText(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
+  }
+}
 
-Widget textR(v) => Row(
+class WidgetTextR extends StatelessWidget {
+  final v;
+
+  const WidgetTextR({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Red\t\t\t\t\t\t\t\t\t',
           ),
         ),
-        AutoSizeText(': '),
-        textToStringFixed(v, 0, 7)
+        const AutoSizeText(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
+  }
+}
 
-Widget textG(v) => Row(
+class WidgetTextG extends StatelessWidget {
+  final v;
+
+  const WidgetTextG({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Green\t\t\t\t\t\t\t',
           ),
         ),
-        AutoSizeText(': '),
-        textToStringFixed(v, 0, 7)
+        const AutoSizeText(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
+  }
+}
 
-Widget textB(v) => Row(
+class WidgetTextB extends StatelessWidget {
+  final v;
+
+  const WidgetTextB({Key? key, required this.v}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        AutoSizeText.rich(
+        const AutoSizeText.rich(
           TextSpan(
             style: globalTextStyle,
             text: 'Blue\t\t\t\t\t\t\t\t\t',
           ),
         ),
-        AutoSizeText(': '),
-        textToStringFixed(v, 0, 7)
+        const AutoSizeText(': '),
+        WidgetTextToStringFixed(v: v, min: 0, max: 5)
       ],
     );
+  }
+}

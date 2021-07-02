@@ -24,7 +24,7 @@ class _TrainingMainPageState extends State<TrainingMainPage> {
                     color: Colors.cyan[700],
                     size: MediaQuery.of(context).size.width / 3,
                   )),
-              AutoSizeText(
+              const AutoSizeText(
                 'KUALITAS BAIK',
                 style: TextStyle(fontSize: 16),
               ),
@@ -41,7 +41,7 @@ class _TrainingMainPageState extends State<TrainingMainPage> {
                     color: Colors.cyan[700],
                     size: MediaQuery.of(context).size.width / 3,
                   )),
-              AutoSizeText('KUALITAS KURANG BAIK',
+              const AutoSizeText('KUALITAS KURANG BAIK',
                   style: TextStyle(fontSize: 14)),
             ],
           ),

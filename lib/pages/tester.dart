@@ -121,6 +121,11 @@ class _TesterPageState extends State<TesterPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => _showWidgetBloc,
@@ -132,15 +137,15 @@ class _TesterPageState extends State<TesterPage> {
           bloc: _showWidgetBloc,
           builder: (context, state) {
             if (state is ShowWidgetInitial) {
-              return _buildLoading();
+              return LoadingWidget();
             } else if (state is ShowWidgetLoading) {
-              return _buildLoading();
+              return LoadingWidget();
             } else if (state is ShowWidgetLoaded) {
               return (state.pageState == 0)
                   ? _pageState0()
                   : (state.pageState == 2)
                       ? _pageData()
-                      : _buildLoading();
+                      : LoadingWidget();
             } else if (state is ShowWidgetError) {
               return Container(
                 child: Text(state.error),
@@ -159,10 +164,13 @@ class _TesterPageState extends State<TesterPage> {
           margin: EdgeInsets.only(top: 10),
           child: Column(
             children: [
-              photoIcon(context),
-              menuButton('Pilih Gambar', () {
-                _showPicker(context);
-              }, context),
+              PhotoIconWidget(),
+              MenuButtonWidget(
+                  v: 'Pilih Gambar',
+                  press: () {
+                    _showPicker(context);
+                  },
+                  c: context),
             ],
           ),
         ),
@@ -179,11 +187,11 @@ class _TesterPageState extends State<TesterPage> {
                 height: 10,
               ),
               _top(data),
-              _bottom()
+              BottomWidget()
             ],
           );
         }
-        return _buildLoading();
+        return LoadingWidget();
       });
 
   Widget _top(data) => Container(
@@ -195,49 +203,69 @@ class _TesterPageState extends State<TesterPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Flexible(flex: 2, child: photoAsset(context, base64)),
-                  widgetData(context, data![0], data[1], data[2], data[3],
-                      data[4], data[5]),
+                  WidgetData(
+                      r: data![0],
+                      g: data[1],
+                      b: data[2],
+                      h: data[3],
+                      s: data[4],
+                      l: data[5]),
                 ],
               ),
             ),
-            menuButton('Pilih Gambar', () {
-              _showPicker(context);
-            }, context),
+            MenuButtonWidget(
+                v: 'Pilih Gambar',
+                press: () {
+                  _showPicker(context);
+                },
+                c: context),
           ],
         ),
       );
+}
 
-  Widget _bottom() => (pickedFile != null)
-      ? Container(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            children: [
-              headingListView(),
-              SizedBox(
-                height: (k > 7) ? MediaQuery.of(context).size.height / 4 : null,
-                child: Scrollbar(
-                  isAlwaysShown: false,
-                  child: ListView(
-                    controller: scrollController,
-                    shrinkWrap: true,
-                    children: [
-                      //Non Fix K
-                      for (int i = 0; i < k; i++) listResult(i),
-                    ],
+class LoadingWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: SizedBox(
+      height: MediaQuery.of(context).size.width / 2,
+      child: JumpingDotsProgressIndicator(
+        fontSize: 20.0,
+        color: Colors.cyan,
+      ),
+    ));
+  }
+}
+
+class BottomWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return (pickedFile != null)
+        ? Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                HeadingListviewWidget(),
+                SizedBox(
+                  height:
+                      (k > 7) ? MediaQuery.of(context).size.height / 4 : null,
+                  child: Scrollbar(
+                    isAlwaysShown: false,
+                    child: ListView(
+                      controller: scrollController,
+                      shrinkWrap: true,
+                      children: [
+                        //Non Fix K
+                        for (int i = 0; i < k; i++) ListResultWidget(i: i),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              textState(sum, k)
-            ],
-          ),
-        )
-      : const SizedBox();
-  Widget _buildLoading() => Center(
-          child: SizedBox(
-        height: MediaQuery.of(context).size.width / 2,
-        child: JumpingDotsProgressIndicator(
-          fontSize: 20.0,
-          color: Colors.cyan,
-        ),
-      ));
+                TextStateWidget(k: k, sum: sum)
+              ],
+            ),
+          )
+        : const SizedBox();
+  }
 }

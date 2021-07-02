@@ -30,7 +30,7 @@ class _SettingPageState extends State<SettingPage> {
         context: context,
         animType: AnimType.SCALE,
         dialogType: DialogType.SUCCES,
-        body: Center(
+        body: const Center(
           child: Text(
             'Berhasil Update Nilai K',
             style: TextStyle(fontStyle: FontStyle.italic),
@@ -117,11 +117,14 @@ class _SettingPageState extends State<SettingPage> {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              menuButton('Simpan', () {
-                if (_formKey.currentState!.validate()) {
-                  _update();
-                }
-              }, context)
+              MenuButtonWidget(
+                  v: 'Simpan',
+                  press: () {
+                    if (_formKey.currentState!.validate()) {
+                      _update();
+                    }
+                  },
+                  c: context)
             ],
           ),
         ),

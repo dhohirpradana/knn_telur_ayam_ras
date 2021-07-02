@@ -1,7 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-Widget menuButton(v, press, c) => Column(
+class MenuButtonWidget extends StatelessWidget {
+  final v, press, c;
+
+  const MenuButtonWidget(
+      {Key? key, required this.v, required this.press, required this.c})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
         const SizedBox(
           height: 10,
@@ -22,3 +30,5 @@ Widget menuButton(v, press, c) => Column(
         )
       ],
     );
+  }
+}

@@ -19,6 +19,7 @@ class _AboutPageState extends State<AboutPage> {
         ),
       ),
       body: Container(
+        // color: Colors.cyan[50],
         padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,7 +27,7 @@ class _AboutPageState extends State<AboutPage> {
             Row(
               children: [
                 const Text(
-                  'Panduan penggunaan aplikasi : ',
+                  'Panduan penggunaan aplikasi ',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
               ],
@@ -83,24 +84,23 @@ class _AboutPageState extends State<AboutPage> {
             ),
             Row(
               children: [
-                const Expanded(
-                  child: Text(
-                    '7. Lihat data uji kualitas telur pada menu data training',
-                    style: TextStyle(fontSize: 15),
-                  ),
+                // Expanded(
+                //   child:
+                const Text(
+                  '7. Lihat data uji kualitas telur pada menu data training',
+                  style: TextStyle(fontSize: 15),
                 ),
+                // ),
               ],
             ),
-            const SizedBox(
-              height: 15,
-              child: Expanded(
-                child: Divider(color: Colors.black),
-              ),
-            ),
+            // Expanded(
+            //   child:
+            const Divider(color: Colors.black),
+            // ),
             Row(
               children: [
                 const Text(
-                  'Info pembuat :',
+                  'Info pembuat ',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
               ],
@@ -116,19 +116,20 @@ class _AboutPageState extends State<AboutPage> {
             Row(
               children: [
                 const Text(
-                  'NIM : 201751013',
+                  'NIM    : 201751013',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                const Expanded(
-                  child: Text(
-                    'Prodi : Teknik Informatika Universitas Muria Kudus',
-                    style: TextStyle(fontSize: 15),
-                  ),
+                // Expanded(
+                //   child:
+                const Text(
+                  'Prodi   : Teknik Informatika Universitas Muria Kudus',
+                  style: TextStyle(fontSize: 15),
                 ),
+                // ),
               ],
             ),
           ],

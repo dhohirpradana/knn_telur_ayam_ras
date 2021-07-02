@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                padding: EdgeInsets.only(bottom: 15),
+                padding: const EdgeInsets.only(bottom: 15),
                 child: JumpingDotsProgressIndicator(
                   fontSize: 20.0,
                   color: Colors.cyan,

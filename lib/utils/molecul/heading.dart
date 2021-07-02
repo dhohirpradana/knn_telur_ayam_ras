@@ -1,7 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-Widget headingListView() => Container(
+class HeadingListviewWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       margin: EdgeInsets.only(bottom: 5),
       child: Row(children: [
         const SizedBox(
@@ -70,3 +73,5 @@ Widget headingListView() => Container(
                 ))),
       ]),
     );
+  }
+}

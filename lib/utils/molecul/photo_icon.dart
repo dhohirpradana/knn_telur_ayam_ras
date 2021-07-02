@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget photoIcon(context) => Container(
+class PhotoIconWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       height: MediaQuery.of(context).size.width / 2,
       width: MediaQuery.of(context).size.width - 20,
       // height: MediaQuery.of(context).size.width - 90,
@@ -13,3 +16,5 @@ Widget photoIcon(context) => Container(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Colors.cyan)),
     );
+  }
+}

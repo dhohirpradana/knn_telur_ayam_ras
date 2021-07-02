@@ -12,7 +12,7 @@ class _Training2PageState extends State<Training2Page> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        title: AutoSizeText(
+        title: const AutoSizeText(
           'DATA TRAINING KUALITAS KURANG BAIK',
           style: TextStyle(fontSize: 12),
         ),
@@ -43,6 +43,7 @@ class _Training2PageState extends State<Training2Page> {
             ),
           );
         },
+        cacheExtent: 1,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 1,

@@ -1,3 +1,3 @@
 import 'package:flutter/rendering.dart';
 
-TextStyle globalTextStyle = TextStyle(fontSize: 12);
+const TextStyle globalTextStyle = TextStyle(fontSize: 12);

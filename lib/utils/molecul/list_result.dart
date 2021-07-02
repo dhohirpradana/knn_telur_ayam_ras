@@ -5,7 +5,13 @@ import 'package:knn_telur/utils/atom/text_state.dart';
 import 'package:knn_telur/utils/atom/text_style.dart';
 import 'package:knn_telur/utils/molecul/listdata.dart';
 
-Widget listResult(i) => Row(children: <Widget>[
+class ListResultWidget extends StatelessWidget {
+  final int i;
+
+  const ListResultWidget({Key? key, required this.i}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: <Widget>[
       SizedBox(
           width: 20,
           child: Container(
@@ -17,12 +23,17 @@ Widget listResult(i) => Row(children: <Widget>[
                 '' + (i + 1).toString(),
                 style: globalTextStyle,
               ))),
-      Expanded(child: textListResult(i, 'r')),
-      Expanded(child: textListResult(i, 'g')),
-      Expanded(child: textListResult(i, 'b')),
-      Expanded(child: textListResult(i, 'h')),
-      Expanded(child: textListResult(i, 's')),
-      Expanded(child: textListResult(i, 'l')),
-      Expanded(child: textListResult(i, 'jarak')),
-      Expanded(child: textStateList(selisihList[i]['state'])),
+      Expanded(child: TextListResultWidget(i: i, param: 'r')),
+      Expanded(child: TextListResultWidget(i: i, param: 'g')),
+      Expanded(child: TextListResultWidget(i: i, param: 'b')),
+      Expanded(child: TextListResultWidget(i: i, param: 'h')),
+      Expanded(child: TextListResultWidget(i: i, param: 's')),
+      Expanded(child: TextListResultWidget(i: i, param: 'l')),
+      Expanded(child: TextListResultWidget(i: i, param: 'jarak')),
+      Expanded(
+          child: TextStateListWidget(
+        v: selisihList[i]['state'],
+      )),
     ]);
+  }
+}

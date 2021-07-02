@@ -19,7 +19,7 @@ class _FoundationPageState extends State<FoundationPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        title: AutoSizeText(
+        title: const AutoSizeText(
           'KLASIFIKASI KUALITAS TELUR AYAM RAS',
           style: TextStyle(fontSize: 14),
         ),
