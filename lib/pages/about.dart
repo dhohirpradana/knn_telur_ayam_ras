@@ -19,66 +19,115 @@ class _AboutPageState extends State<AboutPage> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.only(left: 15),
+        padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Row(
               children: [
-                Text(
-                  'Dibangun menggunakan : ',
+                const Text(
+                  'Panduan penggunaan aplikasi : ',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text(
+                  '1. Buka aplikasi',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '- VSCode Code Editor v1.55.2',
+                const Text(
+                  '2. Masukan gambar pada menu home',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '- Flutter SDK 2.2',
+                const Text(
+                  '3. Pilih gambar yang akan diuji',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '- Java Development Kit v16.0',
+                const Expanded(
+                  child: Text(
+                    '4. Lakukan proses cropping apabila diperlukan, kemudian klik centang',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text(
+                  '5. Tunggu hingga hasilnya muncul',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
-            SizedBox(
+            Row(
+              children: [
+                const Text(
+                  '6. Atur nilai k dalam menu setting',
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    '7. Lihat data uji kualitas telur pada menu data training',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
               height: 15,
+              child: Expanded(
+                child: Divider(color: Colors.black),
+              ),
             ),
             Row(
               children: [
-                Text(
-                  'Implements : ',
+                const Text(
+                  'Info pembuat :',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text(
+                  'Nama : Erma Dwi Widyawati',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '- Null Safety',
+                const Text(
+                  'NIM : 201751013',
                   style: TextStyle(fontSize: 15),
                 ),
               ],
             ),
             Row(
               children: [
-                Text(
-                  '- BLoC Pattern',
-                  style: TextStyle(fontSize: 15),
+                const Expanded(
+                  child: Text(
+                    'Prodi : Teknik Informatika Universitas Muria Kudus',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ),
               ],
             ),

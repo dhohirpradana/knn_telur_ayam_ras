@@ -14,7 +14,7 @@ class ShowWidgetBloc extends Bloc<ShowWidgetEvent, ShowWidgetState> {
   Stream<ShowWidgetState> mapEventToState(
     ShowWidgetEvent event,
   ) async* {
-    if (event is GetPickedFile) {
+    if (event is GetPageState) {
       try {
         yield ShowWidgetInitial();
         final data = (base64 != '' && pickedFile == null)
@@ -22,6 +22,7 @@ class ShowWidgetBloc extends Bloc<ShowWidgetEvent, ShowWidgetState> {
             : (pickedFile != null)
                 ? 2
                 : 0;
+        await Future.delayed(Duration(milliseconds: 600));
         yield ShowWidgetLoaded(pageState: data);
       } catch (e) {
         yield ShowWidgetError(error: 'Error gan...');

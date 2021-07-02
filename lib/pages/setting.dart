@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dialog_loader/dialog_loader.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:knn_telur/helper/list_training.dart';
 import 'package:knn_telur/helper/pref.dart';
@@ -13,7 +13,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  int? kL;
+  int? _kL;
 
   TextEditingController _textEditingController = TextEditingController();
 
@@ -24,41 +24,25 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    DialogLoader dialogLoader = DialogLoader(context: context);
-    _dialogLoader(context) async {
-      setState(() {
-        k = kL!;
-        setPrefK(kL);
-      });
-      dialogLoader.show(
-        theme: LoaderTheme.dialogCircle,
-        title: AutoSizeText(
-          "Menyimpan",
-          style: globalTextStyle,
-        ),
-        leftIcon: SizedBox(
-          child: CircularProgressIndicator(),
-          height: 25.0,
-          width: 25.0,
-        ),
-      );
-    }
-
     void _update() {
-      _dialogLoader(context);
-      Future.delayed(const Duration(milliseconds: 500), () {
-        dialogLoader.update(
-          title: AutoSizeText(
-            "Berhasil",
-            style: globalTextStyle,
+      AwesomeDialog(
+        dismissOnTouchOutside: false,
+        context: context,
+        animType: AnimType.SCALE,
+        dialogType: DialogType.SUCCES,
+        body: Center(
+          child: Text(
+            'Berhasil Update Nilai K',
+            style: TextStyle(fontStyle: FontStyle.italic),
           ),
-          leftIcon: Icon(Icons.done),
-          autoClose: false,
-          barrierDismissible: true,
-        );
-      });
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.pop(context);
+        ),
+        btnOkOnPress: () {
+          // Navigator.pop(context);
+        },
+      )..show();
+      setState(() {
+        k = _kL!;
+        setPrefK(_kL);
       });
     }
 
@@ -100,10 +84,10 @@ class _SettingPageState extends State<SettingPage> {
                   onChanged: (val) {
                     if (val.length == 0) {
                     } else if (int.parse(val) > dataTraining.length) {
-                      kL = dataTraining.length;
+                      _kL = dataTraining.length;
                     } else if (int.parse(val) == 0) {
                     } else {
-                      kL = int.parse(val);
+                      _kL = int.parse(val);
                     }
                   },
                   decoration: InputDecoration(
@@ -117,13 +101,15 @@ class _SettingPageState extends State<SettingPage> {
                       focusColor: Colors.blue),
                   validator: (val) {
                     if (val!.length == 0) {
-                      return "Tidak boleh kosong";
-                    }
-                    // else if (int.parse(val) > dataTraining.length) {
-                    //   return "Tidak boleh lebih dari jumlah data training";
-                    // }
-                    else if (int.parse(val) == 0) {
-                      return "Tidak boleh nol (0)";
+                      return "Tidak boleh kosong!";
+                    } else if (int.parse(val) > dataTraining.length) {
+                      return "Tidak boleh lebih dari jumlah data training!";
+                    } else if (int.parse(val) < 0) {
+                      return "Tidak boleh bernilai negatif(-)!";
+                    } else if (int.parse(val) == 0) {
+                      return "Tidak boleh nol (0)!";
+                    } else if (int.parse(val) == k) {
+                      return "Tidak ada perubahan nilai K";
                     } else {
                       return null;
                     }

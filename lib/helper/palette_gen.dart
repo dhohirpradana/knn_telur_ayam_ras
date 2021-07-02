@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:knn_telur/helper/list_hitung.dart';
@@ -7,8 +8,10 @@ import 'package:knn_telur/helper/pref.dart';
 import 'package:knn_telur/helper/state_store.dart';
 import 'package:palette_generator/palette_generator.dart';
 
-Future<List> getImagePalette(file) async {
-  print(state);
+//get data rgbhsl dari gambar
+//sampai hasil hitung knn
+Future<List> getImagePalette(File file) async {
+  //mengambil data warna dari gambar
   final PaletteGenerator paletteGenerator =
       await PaletteGenerator.fromImageProvider(FileImage(file));
   final dominantColor = (paletteGenerator.lightVibrantColor != null)
@@ -18,6 +21,7 @@ Future<List> getImagePalette(file) async {
           : paletteGenerator.dominantColor!.color;
   final hsl = HSLColor.fromColor(dominantColor);
 
+  //clear list selisis
   selisihList.clear();
   //Data Training
   final rT = (state == 1) ? r : dominantColor.red;
@@ -29,7 +33,7 @@ Future<List> getImagePalette(file) async {
   for (int i = 0; i < dataTraining.length; i++) {
     final hsli = HSLColor.fromColor(Color.fromRGBO(
         dataTraining[i]['r'], dataTraining[i]['g'], dataTraining[i]['b'], 1));
-    //normalisasi Training
+    //declarasi data training
     final ri = dataTraining[i]['r'];
     final gi = dataTraining[i]['g'];
     final bi = dataTraining[i]['b'];
@@ -69,8 +73,11 @@ Future<List> getImagePalette(file) async {
     sum = sum + selisihList[i]['state'] as int;
   }
 
+  //menyimpan nilai warna ke preferences
   setPrefRGBHSL(dominantColor.red.toDouble(), dominantColor.green.toDouble(),
       dominantColor.blue.toDouble(), hsl.hue, hsl.saturation, hsl.lightness);
+  //set pref state ke nilai 1
   setPrefState();
+  //kembalian nilai
   return [rT, gT, bT, hsl.hue, hsl.saturation, hsl.lightness];
 }

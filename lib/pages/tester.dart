@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:knn_telur/bloc/palette_bloc.dart';
 import 'package:knn_telur/bloc/show_widget_bloc.dart';
 import 'package:knn_telur/helper/palette_gen.dart';
 import 'package:knn_telur/helper/pref.dart';
@@ -29,32 +28,28 @@ class TesterPage extends StatefulWidget {
 }
 
 class _TesterPageState extends State<TesterPage> {
-  final PaletteBloc paletteBloc = PaletteBloc();
-  final ShowWidgetBloc showWidgetBloc = ShowWidgetBloc();
-  getPref() async {
+  final ShowWidgetBloc _showWidgetBloc = ShowWidgetBloc();
+  _getPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     base64 = prefs.getString('image') ?? '';
     k = prefs.getInt('k') ?? 3;
-    await Future.delayed(Duration(milliseconds: 800));
-    writeFile(base64);
+    _writeFile(base64);
+    _showWidgetBloc.add(GetPageState());
   }
 
-  void writeFile(string) async {
+  void _writeFile(string) async {
     if (string != '') {
       Uint8List bytes = base64Decode(string);
       String dir = (await getApplicationDocumentsDirectory()).path;
       File file = File(
           "$dir/" + DateTime.now().millisecondsSinceEpoch.toString() + ".jpg");
       await file.writeAsBytes(bytes);
-      getImagePalette(pickedFile);
-      showWidgetBloc.add(GetPickedFile());
     } else {
       pickedFile = null;
-      showWidgetBloc.add(GetPickedFile());
     }
   }
 
-  void showPicker(context) {
+  void _showPicker(context) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
@@ -69,7 +64,7 @@ class _TesterPageState extends State<TesterPage> {
                         style: globalTextStyle,
                       ),
                       onTap: () {
-                        imgPicker(ImageSource.gallery);
+                        _imgPicker(ImageSource.gallery);
                         Navigator.of(context).pop();
                       }),
                   ListTile(
@@ -79,7 +74,7 @@ class _TesterPageState extends State<TesterPage> {
                       style: globalTextStyle,
                     ),
                     onTap: () {
-                      imgPicker(ImageSource.camera);
+                      _imgPicker(ImageSource.camera);
                       Navigator.of(context).pop();
                     },
                   ),
@@ -90,7 +85,7 @@ class _TesterPageState extends State<TesterPage> {
         });
   }
 
-  imgPicker(source) async {
+  _imgPicker(source) async {
     final imageProvider = await ImagePicker()
         .getImage(source: source, maxHeight: 1321, maxWidth: 1602);
     if (imageProvider != null) {
@@ -104,56 +99,48 @@ class _TesterPageState extends State<TesterPage> {
         state = 0;
         pickedFile = croppedImage;
         base64 = base64Encode(bytes);
-        getImagePalette(croppedImage);
-        showWidgetBloc.add(GetPickedFile());
+        _showWidgetBloc.add(GetPageState());
       } else {
         pickedFile = null;
         resetPref();
         base64 = '';
-        showWidgetBloc.add(GetPickedFile());
+        _showWidgetBloc.add(GetPageState());
       }
     } else {
       pickedFile = null;
       resetPref();
       base64 = '';
-      showWidgetBloc.add(GetPickedFile());
+      _showWidgetBloc.add(GetPageState());
     }
   }
 
   @override
   void initState() {
     super.initState();
-    getPref();
+    _getPref();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => showWidgetBloc,
+      create: (BuildContext context) => _showWidgetBloc,
       child: BlocListener<ShowWidgetBloc, ShowWidgetState>(
         listener: (context, state) {
-          if (state is ShowWidgetError) {
-            // ignore: deprecated_member_use
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error),
-              ),
-            );
-          }
+          if (state is ShowWidgetError) {}
         },
         child: BlocBuilder<ShowWidgetBloc, ShowWidgetState>(
-          bloc: showWidgetBloc,
+          bloc: _showWidgetBloc,
           builder: (context, state) {
             if (state is ShowWidgetInitial) {
-              return buildLoading();
+              return _buildLoading();
             } else if (state is ShowWidgetLoading) {
-              return buildLoading();
+              return _buildLoading();
             } else if (state is ShowWidgetLoaded) {
               return (state.pageState == 0)
-                  ? pageState0()
+                  ? _pageState0()
                   : (state.pageState == 2)
-                      ? pageLoadedState2()
-                      : buildLoading();
+                      ? _pageData()
+                      : _buildLoading();
             } else if (state is ShowWidgetError) {
               return Container(
                 child: Text(state.error),
@@ -167,41 +154,39 @@ class _TesterPageState extends State<TesterPage> {
     );
   }
 
-  Widget pageLoadedState2() => FutureBuilder(
-      future: getImagePalette(pickedFile),
-      builder: (BuildContext context, AsyncSnapshot<List> data) {
-        if (data.hasData) {
-          return pageData(data.data);
-        } else {
-          return buildLoading();
-        }
-      });
-
-  Widget pageState0() => Center(
+  Widget _pageState0() => Center(
         child: Container(
           margin: EdgeInsets.only(top: 10),
           child: Column(
             children: [
               photoIcon(context),
               menuButton('Pilih Gambar', () {
-                showPicker(context);
+                _showPicker(context);
               }, context),
             ],
           ),
         ),
       );
 
-  Widget pageData(data) => Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          top(data),
-          bottom()
-        ],
-      );
+  Widget _pageData() => FutureBuilder<Object>(
+      future: getImagePalette(pickedFile!),
+      builder: (context, snapshot) {
+        final data = snapshot.data;
+        if (snapshot.hasData) {
+          return Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              _top(data),
+              _bottom()
+            ],
+          );
+        }
+        return _buildLoading();
+      });
 
-  Widget top(data) => Container(
+  Widget _top(data) => Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -210,19 +195,19 @@ class _TesterPageState extends State<TesterPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Flexible(flex: 2, child: photoAsset(context, base64)),
-                  widgetData(context, data[0], data[1], data[2], data[3],
+                  widgetData(context, data![0], data[1], data[2], data[3],
                       data[4], data[5]),
                 ],
               ),
             ),
             menuButton('Pilih Gambar', () {
-              showPicker(context);
+              _showPicker(context);
             }, context),
           ],
         ),
       );
 
-  Widget bottom() => (pickedFile != null)
+  Widget _bottom() => (pickedFile != null)
       ? Container(
           padding: EdgeInsets.all(10),
           child: Column(
@@ -247,8 +232,12 @@ class _TesterPageState extends State<TesterPage> {
           ),
         )
       : const SizedBox();
-  Widget buildLoading() => Center(
-          child: JumpingDotsProgressIndicator(
-        fontSize: 20,
+  Widget _buildLoading() => Center(
+          child: SizedBox(
+        height: MediaQuery.of(context).size.width / 2,
+        child: JumpingDotsProgressIndicator(
+          fontSize: 20.0,
+          color: Colors.cyan,
+        ),
       ));
 }

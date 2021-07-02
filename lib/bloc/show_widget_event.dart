@@ -7,7 +7,7 @@ abstract class ShowWidgetEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetPickedFile extends ShowWidgetEvent {
+class GetPageState extends ShowWidgetEvent {
   @override
   List<Object> get props => [];
 }

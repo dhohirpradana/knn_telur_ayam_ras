@@ -1,3 +1,4 @@
+//data training
 List dataTraining = [
   {
     'r': 248,

@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:knn_telur/pages/foundation_page.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -56,11 +55,10 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: const SpinKitThreeBounce(
+                padding: EdgeInsets.only(bottom: 15),
+                child: JumpingDotsProgressIndicator(
+                  fontSize: 20.0,
                   color: Colors.cyan,
-                  size: 10.0,
-                  duration: Duration(milliseconds: 4000),
                 ),
               )
             ],

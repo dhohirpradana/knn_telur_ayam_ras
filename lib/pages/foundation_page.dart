@@ -11,7 +11,7 @@ class FoundationPage extends StatefulWidget {
 }
 
 class _FoundationPageState extends State<FoundationPage> {
-  int page = 0;
+  int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
@@ -53,16 +53,16 @@ class _FoundationPageState extends State<FoundationPage> {
         animationDuration: Duration(milliseconds: 500),
         onTap: (index) {
           setState(() {
-            page = index;
+            _page = index;
           });
         },
         letIndexChange: (index) => true,
       ),
       body: Container(
         color: Colors.cyan[50],
-        child: (page == 0)
+        child: (_page == 0)
             ? TesterPage()
-            : (page == 1)
+            : (_page == 1)
                 ? TrainingMainPage()
                 : SettingPage(),
       ),
