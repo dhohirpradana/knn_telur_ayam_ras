@@ -14,7 +14,11 @@ class TextStateWidget extends StatelessWidget {
         margin: EdgeInsets.only(top: 15),
         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: AutoSizeText(
-          (sum <= k / 2) ? 'KURANG BAIK' : 'BAIK',
+          (sum == 0)
+              ? 'KURANG BAIK'
+              : (sum == -1)
+                  ? 'TIDAK BAIK'
+                  : 'BAIK',
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ));
   }

@@ -17,7 +17,9 @@ class ListResultWidget extends StatelessWidget {
           child: Container(
               color: (selisihList[i]['state'] == 0)
                   ? Colors.amber[200]
-                  : Colors.transparent,
+                  : (selisihList[i]['state'] == -1)
+                      ? Colors.red[200]
+                      : Colors.transparent,
               padding: EdgeInsets.only(top: 10),
               child: AutoSizeText(
                 '' + (i + 1).toString(),

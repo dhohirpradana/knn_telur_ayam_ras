@@ -4,6 +4,7 @@ import 'package:knn_telur/pages/about.dart';
 import 'package:knn_telur/pages/splash_screen.dart';
 import 'package:knn_telur/pages/training.dart';
 import 'package:knn_telur/pages/training2.dart';
+import 'package:knn_telur/pages/training3.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/about': (context) => AboutPage(),
         '/trainingbaik': (context) => TrainingPage(),
         '/trainingkurang': (context) => Training2Page(),
+        '/trainingtidak': (context) => Training3Page(),
       },
       // home: SplashScreen(),
     );

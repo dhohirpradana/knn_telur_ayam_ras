@@ -69,9 +69,34 @@ Future<List> getImagePalette(File file) async {
   //SUM List State
   sum = 0;
   // Non Fix K
+  final List selisihListK = [];
   for (var i = 0; i < k; i++) {
     sum = sum + selisihList[i]['state'] as int;
+    selisihListK.add({
+      'state': selisihList[i]['state'],
+    });
   }
+
+  num baik = selisihListK.where((f) => f['state'] == 1).toList().length;
+  num kurangBaik = selisihListK.where((f) => f['state'] == 0).toList().length;
+  num buruk = selisihListK.where((f) => f['state'] == -1).toList().length;
+
+  print(baik.toString() + ' ' + kurangBaik.toString() + ' ' + buruk.toString());
+  final rankState = [
+    {
+      'name': 1,
+      'state': baik,
+    },
+    {
+      'name': 0,
+      'state': kurangBaik,
+    },
+    {'name': -1, 'state': buruk}
+  ];
+
+  rankState.sort((a, b) => a['state']!.compareTo(b['state']!));
+  sum = rankState.last['name']!.toInt();
+  print(rankState.last['name']);
 
   //menyimpan nilai warna ke preferences
   setPrefRGBHSL(dominantColor.red.toDouble(), dominantColor.green.toDouble(),
