@@ -37,7 +37,7 @@ class _TrainingMainPageState extends State<TrainingMainPage> {
                     Navigator.pushNamed(context, '/trainingkurang');
                   },
                   child: Icon(
-                    Icons.folder,
+                    Icons.snippet_folder_rounded,
                     color: Colors.cyan[700],
                     size: MediaQuery.of(context).size.width / 3,
                   )),
