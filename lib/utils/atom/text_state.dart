@@ -10,7 +10,11 @@ class TextStateListWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: AutoSizeText(
-        (v == 1) ? 'B' : 'KB',
+        (v == 1)
+            ? 'B'
+            : (v == 1)
+                ? 'TB'
+                : 'KB',
         style: TextStyle(fontSize: 14),
       ),
     );
