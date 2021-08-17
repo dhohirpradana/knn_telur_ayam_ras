@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 //deklarasi & menyimpan value parameter
 String base64 = '';
-int k = 3;
+int k = 5;
 late File? pickedFile;
 late int sum;
 late int state;

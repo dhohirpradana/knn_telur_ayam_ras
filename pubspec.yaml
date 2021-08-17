@@ -28,7 +28,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.1
   equatable: ^2.0.3
-  flutter_bloc: ^7.0.1
+  flutter_bloc: ^7.1.0
   flutter_isolate: ^2.0.0
   image: ^3.0.2
   image_cropper: ^1.4.0

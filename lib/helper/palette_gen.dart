@@ -104,5 +104,6 @@ Future<List> getImagePalette(File file) async {
   //set pref state ke nilai 1
   setPrefState();
   //kembalian nilai
+
   return [rT, gT, bT, hsl.hue, hsl.saturation, hsl.lightness];
 }

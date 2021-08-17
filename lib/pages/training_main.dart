@@ -45,21 +45,21 @@ class _TrainingMainPageState extends State<TrainingMainPage> {
                   style: TextStyle(fontSize: 14)),
             ],
           ),
-          Column(
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/trainingtidak');
-                  },
-                  child: Icon(
-                    Icons.folder,
-                    color: Colors.cyan[700],
-                    size: MediaQuery.of(context).size.width / 3,
-                  )),
-              const AutoSizeText('KUALITAS TIDAK BAIK',
-                  style: TextStyle(fontSize: 14)),
-            ],
-          ),
+          // Column(
+          //   children: [
+          //     GestureDetector(
+          //         onTap: () {
+          //           Navigator.pushNamed(context, '/trainingtidak');
+          //         },
+          //         child: Icon(
+          //           Icons.folder,
+          //           color: Colors.cyan[700],
+          //           size: MediaQuery.of(context).size.width / 3,
+          //         )),
+          //     const AutoSizeText('KUALITAS TIDAK BAIK',
+          //         style: TextStyle(fontSize: 14)),
+          //   ],
+          // ),
         ],
       ),
     );
