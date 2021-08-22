@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:knn_telur/helper/chooch_helper.dart';
 import 'package:knn_telur/helper/list_hitung.dart';
 import 'package:knn_telur/helper/list_training.dart';
 import 'package:knn_telur/helper/pref.dart';
@@ -11,6 +12,7 @@ import 'package:palette_generator/palette_generator.dart';
 //get data rgbhsl dari gambar
 //sampai hasil hitung knn
 Future<List> getImagePalette(File file) async {
+  final isTelur = await choochEgg(file);
   //mengambil data warna dari gambar
   final PaletteGenerator paletteGenerator =
       await PaletteGenerator.fromImageProvider(FileImage(file));
@@ -104,6 +106,13 @@ Future<List> getImagePalette(File file) async {
   //set pref state ke nilai 1
   setPrefState();
   //kembalian nilai
-
-  return [rT, gT, bT, hsl.hue, hsl.saturation, hsl.lightness];
+  return [
+    rT,
+    gT,
+    bT,
+    hsl.hue,
+    hsl.saturation,
+    hsl.lightness,
+    isTelur["predictions"].length
+  ];
 }

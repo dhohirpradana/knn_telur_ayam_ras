@@ -86,10 +86,11 @@ class _TesterPageState extends State<TesterPage> {
   }
 
   _imgPicker(source) async {
-    final imageProvider = await ImagePicker()
-        .getImage(source: source, maxHeight: 1321, maxWidth: 1602);
+    final imageProvider = await ImagePicker().getImage(
+        source: source, maxHeight: 1321, maxWidth: 1602, imageQuality: 50);
     if (imageProvider != null) {
       final croppedImage = await ImageCropper.cropImage(
+        compressQuality: 80,
         sourcePath: imageProvider.path,
         aspectRatio: CropAspectRatio(ratioX: 3, ratioY: 2.5),
       );
@@ -176,18 +177,28 @@ class _TesterPageState extends State<TesterPage> {
         ),
       );
 
-  Widget _pageData() => FutureBuilder<Object>(
+  Widget _pageData() => FutureBuilder<List>(
       future: getImagePalette(pickedFile!),
       builder: (context, snapshot) {
         final data = snapshot.data;
         if (snapshot.hasData) {
+          print(data![6]);
           return Column(
             children: [
               const SizedBox(
                 height: 10,
               ),
               _top(data),
-              BottomWidget()
+              (data[6] != 0)
+                  ? BottomWidget()
+                  : Padding(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 5),
+                      child: Text(
+                        "Bukan Objek Telur!",
+                        style: TextStyle(fontSize: 24, color: Colors.red),
+                      ),
+                    )
             ],
           );
         }
