@@ -6,8 +6,7 @@ palette generator, shared preference
 ![Test Image 1](https://github.com/dhohirpradana/knn_telur_ayam_ras/blob/bcfd1d21ff1e2edc334ea0e9a1e0369fc325c79f/Screenshot_20210719-103130751.jpg?raw=true)
 ![Test Image 1](https://github.com/dhohirpradana/knn_telur_ayam_ras/blob/bcfd1d21ff1e2edc334ea0e9a1e0369fc325c79f/Screenshot_20210719-103246061.jpg?raw=true)
 ![Test Image 1](https://github.com/dhohirpradana/knn_telur_ayam_ras/blob/bcfd1d21ff1e2edc334ea0e9a1e0369fc325c79f/Screenshot_20210719-103307162.jpg?raw=true)
-
-
+![Test Image 1](https://github.com/dhohirpradana/knn_telur_ayam_ras/blob/bcfd1d21ff1e2edc334ea0e9a1e0369fc325c79f/Screenshot_20210719-103235185.jpg?raw=true)
 
 
 ## Getting Started
