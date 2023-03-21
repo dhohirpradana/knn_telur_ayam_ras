@@ -25,7 +25,7 @@ dependencies:
   awesome_dialog: ^2.1.0
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.1
-  dio: ^4.0.0
+  dio: ^5.0.3
   equatable: ^2.0.3
   flutter:
     sdk: flutter
